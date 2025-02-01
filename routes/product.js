@@ -7,6 +7,8 @@ import {
   addProduct,
   updateProduct,
   deleteProduct,
+  searchProductByName,
+  getIndexes,
 } from "../controllers/productController.js";
 
 const router = express.Router();
@@ -18,5 +20,9 @@ router.post("/", addProduct);
 router.put("/:id", updateProduct);
 
 router.delete("/:id", deleteProduct);
+
+router.get("/search", searchProductByName);
+
+getIndexes();
 
 export default router;
