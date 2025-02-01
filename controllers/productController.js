@@ -12,7 +12,8 @@ export async function getProducts(req, res, next) {
 }
 
 export async function getProductById(req, res, next) {
-  const product = await Product.findById({ _id: req.params.id });
+  console.log(req.params.id);
+  const product = await Product.findById(req.params.id);
   console.log(product);
   if (product) {
     res.status(200).json({ message: "Success", data: { product } });
