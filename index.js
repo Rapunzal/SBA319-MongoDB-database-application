@@ -13,14 +13,34 @@ const app = express();
 app.use(express.json());
 
 const connectionString = process.env.MONGO_URI;
-mongoose.connect(connectionString).then(() => {
-  console.log(`Mongo db connected`);
-});
+mongoose
+  .connect(connectionString)
+  .then(() => {
+    console.log(`Mongo db connected`);
+  })
+  .catch((e) => {
+    console.log(`${e}`);
+  });
 
 app.use(router);
 app.use("/products", product);
 app.use("/user", user);
 app.use("/order", order);
+
+app.all("*", (req, res, next) => {
+  const err = new Error(`can't find ${req.originalUrl} on the server`);
+  err.status = "fail";
+  err.statusCode = 404;
+  next(err);
+});
+
+app.use((error, req, res, next) => {
+  error.statusCode = error.statusCode || 500;
+  error.status = error.status || "error";
+  res
+    .status(error.statusCode)
+    .json({ status: error.status, message: error.message });
+});
 
 app.listen(PORT, () => {
   console.log(`App is listening on ${PORT}`);

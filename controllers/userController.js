@@ -10,6 +10,9 @@ export async function addUser(req, res) {
   try {
     const newUser = new User({
       name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      role: req.body.role,
     });
     await newUser.save();
     console.log(newUser);

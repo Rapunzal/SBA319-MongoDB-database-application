@@ -1,9 +1,14 @@
 import Product from "../models/product.js";
 
-export async function getProducts(req, res) {
+export async function getProducts(req, res, next) {
   const listProduct = await Product.find({});
   console.log(listProduct);
-  res.status(200).json({ message: "Success", data: { listProduct } });
+  if (listProduct.length > 0) {
+    res.status(200).json({ message: "Success", data: { listProduct } });
+  } else {
+    // next("No data")
+    res.send("No data found");
+  }
 }
 
 export async function searchProductByName(req, res) {
@@ -15,7 +20,7 @@ export async function searchProductByName(req, res) {
   res.status(200).json({ message: "Success", data: { listProduct } });
 }
 
-export async function addProduct(req, res) {
+export async function addProduct(req, res, next) {
   try {
     const newProduct = new Product({
       productName: req.body.productName,
@@ -26,29 +31,31 @@ export async function addProduct(req, res) {
     });
     await newProduct.save();
     console.log(newProduct);
+    res.send("product added successfully");
   } catch (e) {
     console.log(e);
-    res.send(e);
+    next(e);
   }
-  res.send("product added");
 }
 
-export async function updateProduct(req, res) {
+export async function updateProduct(req, res, next) {
   try {
     await Product.findByIdAndUpdate(req.params.id, req.body);
     res.json("updated successfully");
   } catch (e) {
     console.log(e);
+    next(e);
   }
 }
 
-export async function deleteProduct(req, res) {
+export async function deleteProduct(req, res, next) {
   try {
     await Product.findByIdAndDelete(req.params.id);
     console.log("deleted successfully");
     res.json("deleted successfully");
   } catch (e) {
     console.log(e);
+    next(e);
   }
 }
 
