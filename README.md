@@ -29,11 +29,3 @@
 | http://localhost:3000/order/               |  Post  |    Create |
 | http://localhost:3000/order/:id            |  Put   |    Update |
 | http://localhost:3000/order/:id            | Delete |    Delete |
-
-- Get
-  addProduct,
-  updateProduct,
-  deleteProduct,
-  searchProductByName,
-  getIndexes,
-  getProductById,

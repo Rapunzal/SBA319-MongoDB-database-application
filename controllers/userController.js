@@ -6,7 +6,7 @@ export async function getUsers(req, res) {
   res.status(200).json({ message: "Success", data: { listUser } });
 }
 
-export async function addUser(req, res) {
+export async function addUser(req, res, next) {
   try {
     const newUser = new User({
       name: req.body.name,
@@ -16,28 +16,31 @@ export async function addUser(req, res) {
     });
     await newUser.save();
     console.log(newUser);
+    res.send("User added");
   } catch (e) {
     console.log(e);
-    res.send(e);
+    next(e);
+    //res.send(e);
   }
-  res.send("User added");
 }
 
-export async function updateUser(req, res) {
+export async function updateUser(req, res, next) {
   try {
-    await User.findByIdAndUpdate(req.params.id, req.body);
-    res.json("User updated successfully");
+    const user = await User.findByIdAndUpdate(req.params.id, req.body);
+    res.status(200).json({ message: "User updated successfully", data: user });
   } catch (e) {
     console.log(e);
+    next(e);
   }
 }
 
-export async function deleteUser(req, res) {
+export async function deleteUser(req, res, next) {
   try {
     await User.findByIdAndDelete(req.params.id);
     console.log("User deleted successfully");
     res.json("User deleted successfully");
   } catch (e) {
     console.log(e);
+    next(e);
   }
 }
