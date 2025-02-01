@@ -11,6 +11,17 @@ export async function getProducts(req, res, next) {
   }
 }
 
+export async function getProductById(req, res, next) {
+  const product = await Product.findById({ _id: req.params.id });
+  console.log(product);
+  if (product) {
+    res.status(200).json({ message: "Success", data: { product } });
+  } else {
+    // next("No data")
+    res.send("No data found");
+  }
+}
+
 export async function searchProductByName(req, res) {
   console.log(req.query.productName);
   const listProduct = await Product.find({

@@ -24,7 +24,7 @@ mongoose
 
 app.use(router);
 app.use("/products", product);
-app.use("/user", user);
+app.use("/users", user);
 app.use("/order", order);
 
 app.all("*", (req, res, next) => {
