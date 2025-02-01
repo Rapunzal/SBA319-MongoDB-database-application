@@ -4,19 +4,19 @@ import "dotenv/config";
 import express from "express";
 import {
   getProducts,
-  addProducts,
-  updateProducts,
-  deleteProducts,
+  addProduct,
+  updateProduct,
+  deleteProduct,
 } from "../controllers/productController.js";
 
 const router = express.Router();
 
 router.get("/", getProducts);
 
-router.post("/", addProducts);
+router.post("/", addProduct);
 
-router.put("/:id", updateProducts);
+router.put("/:id", updateProduct);
 
-router.delete("/:id", deleteProducts);
+router.delete("/:id", deleteProduct);
 
 export default router;

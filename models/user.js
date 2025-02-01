@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema(
     },
   },
   {
-    collection: "User",
+    collection: "user",
   }
 );
 

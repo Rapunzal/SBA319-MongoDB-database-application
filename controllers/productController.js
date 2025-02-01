@@ -6,7 +6,7 @@ export async function getProducts(req, res) {
   res.status(200).json({ message: "Success", data: { listProduct } });
 }
 
-export async function addProducts(req, res) {
+export async function addProduct(req, res) {
   try {
     const newProduct = new Product({
       productName: req.body.productName,
@@ -24,7 +24,7 @@ export async function addProducts(req, res) {
   res.send("product added");
 }
 
-export async function updateProducts(req, res) {
+export async function updateProduct(req, res) {
   try {
     await Product.findByIdAndUpdate(req.params.id, req.body);
     res.json("updated successfully");
@@ -33,7 +33,7 @@ export async function updateProducts(req, res) {
   }
 }
 
-export async function deleteProducts(req, res) {
+export async function deleteProduct(req, res) {
   try {
     await Product.findByIdAndDelete(req.params.id);
     console.log("deleted successfully");
