@@ -1,5 +1,6 @@
 import Order from "../models/order.js";
 
+//Get orders
 export async function getOrders(req, res, next) {
   const listOrder = await Order.find({});
   console.log(listOrder);
@@ -10,7 +11,7 @@ export async function getOrders(req, res, next) {
   }
 }
 
-//addOrder
+//addOrder POST request
 export async function addOrder(req, res, next) {
   try {
     const newOrder = new Order({
@@ -29,6 +30,7 @@ export async function addOrder(req, res, next) {
   }
 }
 
+//UPdate order PATCH
 export async function updateOrder(req, res, next) {
   try {
     await Order.findByIdAndUpdate(req.params.id, req.body);
@@ -39,6 +41,7 @@ export async function updateOrder(req, res, next) {
   }
 }
 
+//Delete Order
 export async function deleteOrder(req, res, next) {
   try {
     await Order.findByIdAndDelete(req.params.id);
