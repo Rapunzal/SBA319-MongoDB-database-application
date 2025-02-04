@@ -25,7 +25,7 @@ mongoose
 app.use(router);
 app.use("/products", product);
 app.use("/users", user);
-app.use("/order", order);
+app.use("/orders", order);
 
 app.all("*", (req, res, next) => {
   const err = new Error(`can't find ${req.originalUrl} on the server`);
