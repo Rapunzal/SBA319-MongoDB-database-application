@@ -5,8 +5,8 @@ const productSchema = new mongoose.Schema(
     productName: {
       type: String,
       required: [true, "Product name is required"],
-      unique: true,
-      index: "text",
+      unique: true, //Making product name as unique
+      index: "text", //enforcing index on field
     },
     description: {
       type: String,
