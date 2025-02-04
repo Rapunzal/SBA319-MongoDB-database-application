@@ -1,11 +1,13 @@
 import User from "../models/user.js";
 
+//Display list of users
 export async function getUsers(req, res) {
   const listUser = await User.find({});
   console.log(listUser);
   res.status(200).json({ message: "Success", data: { listUser } });
 }
 
+//Add user
 export async function addUser(req, res, next) {
   try {
     const newUser = new User({
@@ -24,6 +26,7 @@ export async function addUser(req, res, next) {
   }
 }
 
+//Update user
 export async function updateUser(req, res, next) {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, req.body);
@@ -34,6 +37,7 @@ export async function updateUser(req, res, next) {
   }
 }
 
+//Delete user
 export async function deleteUser(req, res, next) {
   try {
     await User.findByIdAndDelete(req.params.id);

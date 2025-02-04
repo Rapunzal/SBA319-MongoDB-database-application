@@ -1,5 +1,6 @@
 import Product from "../models/product.js";
 
+//Get list of products
 export async function getProducts(req, res, next) {
   const listProduct = await Product.find({});
   console.log(listProduct);
@@ -11,6 +12,7 @@ export async function getProducts(req, res, next) {
   }
 }
 
+//get products by id
 export async function getProductById(req, res, next) {
   console.log(req.params.id);
   const product = await Product.findById(req.params.id);
@@ -23,6 +25,7 @@ export async function getProductById(req, res, next) {
   }
 }
 
+//search product by name
 export async function searchProductByName(req, res) {
   console.log(req.query.productName);
   const listProduct = await Product.find({
@@ -32,6 +35,7 @@ export async function searchProductByName(req, res) {
   res.status(200).json({ message: "Success", data: { listProduct } });
 }
 
+//Add Product POST Rrequest
 export async function addProduct(req, res, next) {
   try {
     const newProduct = new Product({
@@ -50,6 +54,7 @@ export async function addProduct(req, res, next) {
   }
 }
 
+//Update product
 export async function updateProduct(req, res, next) {
   try {
     await Product.findByIdAndUpdate(req.params.id, req.body);
@@ -60,6 +65,7 @@ export async function updateProduct(req, res, next) {
   }
 }
 
+//Delete product
 export async function deleteProduct(req, res, next) {
   try {
     await Product.findByIdAndDelete(req.params.id);
@@ -71,6 +77,7 @@ export async function deleteProduct(req, res, next) {
   }
 }
 
+//To display all the indexes on Product
 export async function getIndexes() {
   try {
     const indexes = await Product.collection.getIndexes();
